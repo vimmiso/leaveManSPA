@@ -1,0 +1,220 @@
+
+<div class="table-responsive ">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <button type="submit" class="btn btn-success mr-3" (click)="onClick1()">Profile</button>
+                    <button type="submit" class="btn btn-secondary" (click)="onClick2()" >Leave</button>
+                </th>
+                
+                <!-- <th>
+                    <button type="submit" class="btn btn-secondary btn-block">Submit</button>
+                </th> -->
+            </tr>
+        </thead>
+
+    </table>
+</div>
+<div *ngIf='show1' class="table-responsive" >
+    <table class="table">
+        <!-- <thead>
+            <tr> -->
+                <!-- <th>
+                    <button class="btn btn-primary">
+                        Show Image
+                    </button>
+                </th> -->
+                <!-- <th>Name</th>
+                <th>Email</th>
+                <th>DOB</th>
+                <th>DOJ</th>
+                <th>Salary</th>
+                <th>Role</th>
+                <th>TotalLeave</th>
+            </tr>
+        </thead> -->
+        <tbody>
+            
+                
+            
+
+            <div *ngFor='let employee of employeelist' >
+                <!-- <th>{{uniqueid}} {{employee.id}}</th> -->
+                <!-- <span *ngIf='employee.id === 7'> -->
+                    <tr *ngIf='employee.id === uniqueid'>
+                        <th>Name</th>
+                        <th >{{employee.name}}</th>
+                    </tr>
+                    <tr *ngIf='employee.id === uniqueid'>
+                        <th>Email</th>
+                        <th >{{employee.email}}</th>
+                    </tr>
+                    <tr *ngIf='employee.id === uniqueid'>
+                        <th>DOB</th>
+                        <th>{{employee.dob}}</th>
+                    </tr>
+                    <tr *ngIf='employee.id === uniqueid'>
+                        <th>DOJ</th>
+                        <th>{{employee.doj}}</th>
+                    </tr>
+                    <tr *ngIf='employee.id === uniqueid'>
+                        <th>Salary</th>
+                        <th>{{employee.salary}}</th>
+                    </tr>
+                    <tr *ngIf='employee.id === uniqueid'>
+                        <th>Role</th>
+                        <th>{{employee.role}}</th>
+                    </tr>
+                    <tr *ngIf='employee.id === uniqueid'>
+                        <th>TotalLeave</th>
+                        <th>{{employee.totalLeave}}</th>
+                    </tr>
+                </div>
+                <!-- Id:number,
+    EmployeeId:number,
+    LeaveId:number,
+    Status:number,
+    StartDate:string,
+    EndDate:string,
+    LeaveType:string,
+    NoofDays:number -->
+             
+                    <!-- <th *ngIf='employee.id === uniqueid'>{{employee.name}}</th>
+                    <th *ngIf='employee.id === uniqueid'>{{employee.email}}</th>
+                    <th *ngIf='employee.id === uniqueid'>{{employee.dob}}</th>
+                    <th *ngIf='employee.id === uniqueid'>{{employee.doj}}</th>
+                    <th *ngIf='employee.id === uniqueid'>{{employee.salary}}</th>
+                    <th *ngIf='employee.id === uniqueid'>{{employee.role}}</th>
+                    <th *ngIf='employee.id === uniqueid'>{{employee.totalLeave}}</th> -->
+                <!-- </span> -->
+                <!-- <th>{{employee.name}}</th>
+                    <th>{{employee.email}}</th>
+                    <th>{{employee.dob}}</th>
+                    <th>{{employee.doj}}</th>
+                    <th>{{employee.salary}}</th>
+                    <th>{{employee.role}}</th>
+                    <th>{{employee.totalLeave}}</th> -->
+                
+
+            <!-- </tr> -->
+        </tbody>
+    </table>
+</div>
+<div *ngIf='show2'  class="table-responsive">
+    <table class="table" >
+        <thead>
+            <tr>
+                <th>Leave Dates</th>
+                <th>Leave Type</th>
+                <th>Number of Days</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+    
+                    <tr *ngFor='let employeeleave of employeeleavelist'>
+                        <!-- <th>{{uniqueid}} {{employee.id}}</th> -->
+                        <!-- <span *ngIf='employee.id === 7'> -->
+                            <!-- <tr> -->
+                                <!-- <th>Leave Dates</th> -->
+                                <th  *ngIf='employeeleave.employeeId === uniqueid' >{{employeeleave.startDate}} to {{employeeleave.endDate}}</th>
+                            <!-- </tr> -->
+                            <!-- <tr *ngIf='employeeleave.employeeId === uniqueid'> -->
+                                <!-- <th>Email</th> -->
+                                <th  *ngIf='employeeleave.employeeId === uniqueid'>{{employeeleave.leaveType}}</th>
+                            <!-- </tr> -->
+                            <!-- <tr *ngIf='employeeleave.employeeId === uniqueid'> -->
+                                <!-- <th>DOB</th> -->
+                                <th  *ngIf='employeeleave.employeeId === uniqueid'>{{employeeleave.noofDays}}</th>
+                            <!-- </tr> -->
+                            <!-- <tr *ngIf='employeeleave.employeeId === uniqueid'> -->
+                                <!-- <th>DOJ</th> -->
+                                <th  *ngIf='employeeleave.employeeId === uniqueid'>{{employeeleave.status}}</th>
+                            </tr>
+                            <!-- <tr *ngIf='employeeleave.EmployeeId === uniqueid'>
+                                <th>Salary</th>
+                                <th>{{employee.salary}}</th>
+                            </tr>
+                            <tr *ngIf='employeeleave.EmployeeId === uniqueid'>
+                                <th>Role</th>
+                                <th>{{employee.role}}</th>
+                            </tr>
+                            <tr *ngIf='employeeleave.EmployeeId === uniqueid'>
+                                <th>TotalLeave</th>
+                                <th>{{employee.totalLeave}}</th>
+                            </tr> -->
+                        <!-- </div> -->
+               
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-secondary" (click)="onClick3()" >Apply</button>
+</div>
+<!-- <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" [(ngModel)]="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                </div> -->
+                <!-- <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" [(ngModel)]="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div> -->
+<form *ngIf="show3" (ngSubmit)="SaveFormData(formData)" #formData="ngForm" id="form">
+    <div class="form-group row">
+        <div class="col-xs-4 mr-3">
+          <label for="leave"> <b>Leave Type</b> </label>
+        </div>
+        <div class="col-xs-12 col-12 col-md-4 form-group">
+            <select class="form-control form-control-sm" [(ngModel)]="leavetype" name="leavetype1">
+              <option default>Select Type </option>
+              <option >Casual</option>
+              <option >Sick</option>
+              <option>Restricted</option>
+            </select>
+          </div>
+    </div>
+    <div class="form-group row">
+        
+        <div class="col-xs-4 mr-3">
+            <label for="leave"> <b>From Date</b> </label>
+        </div>
+        <div class="col-xs-12 col-12 col-md-4 form-group">
+            <input type="text"
+            placeholder="Select date"
+            class="form-control form-control-sm"
+            [(ngModel)]="fromdate"
+            name="fromdate"
+            bsDatepicker>
+        </div>
+    </div>
+    <div class="form-group row">
+        
+            <div class="col-xs-4 mr-3">
+                <label for="leave"> <b>To Date</b> </label>
+            </div>
+            <div class="col-xs-12 col-12 col-md-4 form-group">
+                <input type="text"
+                placeholder="Select date"
+                [(ngModel)]="todate"
+                name="todate"
+                class="form-control form-control-sm"
+                bsDatepicker>
+            </div>
+    </div>
+    <!-- value="{{ todate | date:'dd-MM-yyyy' }}" -->
+    <div class="form-group row">
+        
+        <div class="col-xs-4 mr-3">
+            <label for="save" hidden> <b>Save</b> </label>
+        </div>
+        <div class="col-xs-12 col-12 col-md-4 form-group">
+            <button type="submit" class="btn btn-secondary form-control form-control-sm" (submit)="onClick4()" >Save</button>
+
+        </div>
+</div>
+    
+    <!-- <input class="datepicker" data-date-format="mm/dd/yyyy"> -->
+
+</form>
+
+
