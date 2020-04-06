@@ -1,3 +1,4 @@
+import { Ileave } from './../models/ileave';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -13,8 +14,8 @@ export class LeaveserviceService {
   private employeeUrl = "http://localhost:5000/api/leave";
   constructor(private http:HttpClient) { }
 
-  getleaves():Observable<IEmployee[]> {
-    return this.http.get<IEmployee[]>(this.employeeUrl).pipe(
+  getleaves():Observable<Ileave[]> {
+    return this.http.get<Ileave[]>(this.employeeUrl).pipe(
       tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );

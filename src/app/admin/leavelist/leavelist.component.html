@@ -1,0 +1,91 @@
+
+<form>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <th>
+            <a [routerLink]="['/manageemp']">
+            <button type="submit" class="btn btn-success mr-3">Employee</button>
+            </a>
+            <a [routerLink]="['/leaveconfig']">
+            <button type="submit" class="btn btn-success mr-3">Leave Configuration</button>
+            </a>
+            <a [routerLink]="['/leavelist']">
+            <button type="submit" class="btn btn-success mr-3">Leave List</button>
+            </a>
+        </th>
+        </thead>
+      </table>
+    </div>
+  </form>
+<div class="card">
+    <div class="card-header">
+        Employee's Leave List
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">Filter by:</div>
+            <div class="col-md-4">
+                <input type="text" class="employee"/>
+            </div>
+            <div class="btn-group float-right" style="position: absolute; margin-left: 80%;">
+                <button type="submit" class="btn btn-secondary">+Add</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Filtered by: </h4>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <!-- <th>
+                            <button class="btn btn-primary">
+                                Show Image
+                            </button>
+                        </th> -->
+                        <th>Employee Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Leave</th>
+                        <th>Leave Type</th>
+                        <th>Number of Days</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <span *ngFor='let employee of employeelist'>
+                    
+
+                        
+                        <span *ngFor='let employeeleave of employeeLeavelist'>
+                            <tr *ngIf="employee.id === employeeleave.employeeId">
+                            <th >{{employee.name}}</th>    
+                            <th >{{employeeleave.startDate}}</th>
+                            <th >{{employeeleave.endDate}}</th>
+                            <th >{{employee.totalLeave}}</th>
+                            <th >{{employeeleave.leaveType}}</th>
+                            <th >{{employeeleave.noofDays}}</th>                            
+                            <th >
+                                <div class="form-group">
+                                    <select class="form-control form-control-sm" [(ngModel)]="action" name="action">
+                                    <option value="default" selected>Select Action </option>
+                                    <option value="Approve" >Approve</option>
+                                    <option value="Reject">Reject</option>
+                                    
+                                    </select>
+                                </div>
+                            </th> 
+                            </tr>                       
+                        </span>
+                      
+                    </span>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

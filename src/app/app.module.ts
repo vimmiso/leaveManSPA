@@ -1,3 +1,5 @@
+import { AdminRouting } from './admin/admin.routing';
+import { AdminModule } from './admin/admin.module';
 import { AppRouting } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,11 +22,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 @NgModule({
   declarations: [
     AppComponent,
+    AdminComponent,
     EmployeeComponent,
     HeaderComponent,
     EmployeeListComponent,
     HomeComponent,
-    AdminComponent,
     PagenotfoundComponent,
     EmployeedetailsComponent
   ],
@@ -32,9 +34,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRouting,
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    AdminModule,
+    AppRouting
 
   ],
   providers: [],

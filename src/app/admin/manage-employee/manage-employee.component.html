@@ -1,0 +1,72 @@
+
+<form>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <th>
+            <a [routerLink]="['/manageemp']">
+            <button type="submit" class="btn btn-success mr-3">Employee</button>
+            </a>
+            <a [routerLink]="['/leaveconfig']">
+            <button type="submit" class="btn btn-success mr-3">Leave Configuration</button>
+            </a>
+            <a [routerLink]="['/leavelist']">
+            <button type="submit" class="btn btn-success mr-3">Leave List</button>
+            </a>
+        </th>
+        </thead>
+      </table>
+    </div>
+  </form>
+<div class="card">
+    <div class="card-header">
+        Employee List
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">Filter by:</div>
+            <div class="col-md-4">
+                <input type="text" class="employee"/>
+            </div>
+            <div class="btn-group float-right" style="position: absolute; margin-left: 80%;">
+                <button type="submit" class="btn btn-secondary">+Add</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Filtered by: </h4>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <!-- <th>
+                            <button class="btn btn-primary">
+                                Show Image
+                            </button>
+                        </th> -->
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Date of Joining</th>
+                        <th>Date of Birth</th>
+                        <th>Edit/Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let employee of employeelist'>
+
+                        <th>{{employee.name}}</th>
+                        <th>{{employee.email}}</th>
+                        <th>{{employee.doj}}</th>
+                        <th>{{employee.dob}}</th>
+                       
+                        <th><button class="btn mr-3"><img src="/assets/edit.png" alt=""> </button><button class="btn"><img src="/assets/delete.png" alt=""> </button> </th>
+                        
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

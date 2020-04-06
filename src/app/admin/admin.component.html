@@ -1,4 +1,4 @@
-<form (ngSubmit)="SaveFormData(formData)" #formData="ngForm" id="form"  style="margin-top: 2%; border-radius: 30px;height: 500px; width: 80%; margin-left: 10%; background-position: center;">
+<form #form="ngForm" id="form"  style="margin-top: 2%; border-radius: 30px;height: 500px; width: 80%; margin-left: 10%; background-position: center;">
     <div class="w-100 container"  >
       <div class="row">
         <div class="col-md-3"></div>
@@ -10,8 +10,10 @@
                   <span class="input-group-text" id="basic-addon1">    <img src="./assets/user.png" width="25" height="25" class=" rounded-circle d-inline-block align-top mr-sm-2" alt="">
                   </span>
                 </div>
-                <input type="text" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1">
-              </div>
+                <input type="email" class="form-control" name="email" placeholder="To proceed please enter valid Email..." aria-label="Email" 
+                aria-describedby="basic-addon1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [(ngModel)]="Employee.Email" required #emailField="ngModel"
+                [class.field-error]="form.submitted && emailField.invalid">
+                </div>
                 <!-- <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
                   <input type="email" [(ngModel)]="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -20,12 +22,30 @@
                   <label for="exampleInputPassword1">Password</label>
                   <input type="password" [(ngModel)]="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div> -->
-               
-                <button type="submit" class="btn btn-secondary btn-block">Submit</button>
+                <div *ngFor='let employee of employeelist'>
+                  <div *ngIf='employee.email === Employee.Email'>
+                    <a [routerLink]="['/manageemp']">
+                    <button type="submit" class="btn btn-secondary btn-block">Submit</button>
+                    </a>
+                  </div>
+  
+                </div>
+                <!-- <button type="submit" class="btn btn-secondary btn-block">Submit</button> -->
               </div>
           </div>
           <div class="col-md-3"></div>
       </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        <div [hidden]="!form.submitted || emailField.valid" class="alert alert-danger" data-placement="top">
+          Enter the valid email
+        </div>
+      </div>
+       
+  
+      </div>
+    
     </div>
       <!-- <div class="form-group">
           <label for="exampleInputName">Name</label>
@@ -44,3 +64,4 @@
     </div> -->
    
     </form>
+    

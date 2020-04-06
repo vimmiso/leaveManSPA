@@ -13,7 +13,7 @@ const APP_ROUTES: Routes = [
     {path: 'employeelogin',component: EmployeeComponent},
     {path: 'adminlogin',component: AdminComponent},
     {path: 'employeelogin/:id',component: EmployeedetailsComponent},
-    { path: '**', component: EmployeeListComponent }
+    { path: '**', component: PagenotfoundComponent }
     
 ];
 
