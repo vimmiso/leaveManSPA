@@ -1,12 +1,13 @@
+import { Iemployeeleave } from './../../models/iemployeeleave';
 import { EmployeeleaveserviceService } from './../../services/employeeleaveservice.service';
 import { Component, OnInit } from '@angular/core';
 import { IEmployee } from 'src/app/models/iemployee';
 import { HttpClient } from '@angular/common/http';
 import { EmployeeserviceService } from 'src/app/services/employeeservice.service';
-import { ActivatedRoute } from '@angular/router';
-import { Iemployeeleave } from 'src/app/models/iemployeeleave';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-employeedetails',
@@ -31,47 +32,12 @@ export class EmployeedetailsComponent implements OnInit {
 
   uniqueid:number = Number(this.route.snapshot.paramMap.get('id'));
    
-  SaveFormData(formData: NgForm){
-    var date1 = new Date(this.fromdate);
-    var date2 = new Date(this.todate);
-    var time = date2.getTime()-date1.getTime();
-      const days = Number(time/(3600*1000*24));
-    console.log(days);
-    console.log(date1);
-    console.log(date2);
-    
-    // this.fromdate=this.datePipe.transform(this.fromdate, "dd-MM-yyyy");
-
-    // this.todate=this.datePipe.transform(this.todate, "dd-MM-yyyy");
-     const leave = {
-      // EmployeeId: this.uniqueid,
-      // LeaveId:2,
-      // Status:this.status,
-      // StartDate:date1.toDateString(),
-      // EndDate:date2.toDateString(),
-      // LeaveType:this.leavetype,
-      // NoofDays: days
-      EmployeeId: 2,
-      LeaveId:2,
-      Status:'Pending',
-      StartDate:'12-04-2020',
-      EndDate:'16-04-2020',
-      LeaveType:'Sick',
-      NoofDays: 5
-      // Password: this.password
-    };
-    console.log(leave);
-    this.http.post('http://localhost:5000/api/empleavemapping',leave)
-    .subscribe((response)=>{
-      console.log(response);
-    });
-
-    formData.resetForm();
-  }
-
-  constructor(private http:HttpClient,private employeeService:EmployeeserviceService,private route:ActivatedRoute,private employeeleaveservice:EmployeeleaveserviceService) { }
- 
   ngOnInit(): void {
+    this.onLoad();
+    // console.log(this.employeeleavelist)
+    // console.log(this.uniqueid);
+  }
+  onLoad():void{
     this.employeeService.getemployees().subscribe(
       employees => {
         this.employeelist = employees;
@@ -86,9 +52,65 @@ export class EmployeedetailsComponent implements OnInit {
       },
       error => this.errorMessage = <any>error
     );
-    // console.log(this.employeeleavelist)
-    // console.log(this.uniqueid);
   }
+
+  SaveFormData(formData: NgForm){
+    var date1 = new Date(this.fromdate);
+    var date2 = new Date(this.todate);
+    var time = date2.getTime()-date1.getTime();
+      const days = Number(time/(3600*1000*24));
+    console.log(days);
+    console.log(date1);
+    console.log(date2);
+    
+    // this.fromdate=this.datePipe.transform(this.fromdate, "dd-MM-yyyy");
+
+    // this.todate=this.datePipe.transform(this.todate, "dd-MM-yyyy");
+     const leave = {
+      EmployeeId: this.uniqueid,
+      LeaveId:2,
+      Status:this.status,
+      StartDate:date1.toDateString(),
+      EndDate:date2.toDateString(),
+      LeaveType:this.leavetype,
+      NoofDays: days
+      // EmployeeId: 2,
+      // LeaveId:2,
+      // Status:'Pending',
+      // StartDate:'12-04-2020',
+      // EndDate:'16-04-2020',
+      // LeaveType:'Sick',
+      // NoofDays: 5
+      // Password: this.password
+    };
+    console.log(leave);
+    this.http.post('http://localhost:5000/api/empleavemapping',leave)
+    .subscribe((response)=>{
+      
+      // this.employeeleavelist.push(<Iemployeeleave>leave);
+      console.log(response);
+    });
+    this.onLoad();
+    
+    formData.resetForm();
+    
+    
+    // this.router.navigate(['/employeelogin',this.uniqueid]).then(nav => {
+    //   console.log(nav); // true if navigation is successful
+    // }, err => {
+    //   console.log(err) // when there's an error
+    // });
+    this.show1 = false;
+    this.show2 = true;
+    this.show3 = false;
+    this.show4 = true;
+  }
+
+  constructor(private http:HttpClient,private employeeService:EmployeeserviceService,
+    private route:ActivatedRoute,private employeeleaveservice:EmployeeleaveserviceService,
+    private router: Router) { }
+ 
+ 
 
   onClick1():void{
     this.show1 = true;
@@ -115,10 +137,10 @@ export class EmployeedetailsComponent implements OnInit {
   }
 
   onClick4():void{
-    this.show1 = false;
-    this.show2 = true;
-    this.show3 = false;
-    this.show4 = true;
+    // this.show1 = false;
+    // this.show2 = true;
+    // this.show3 = false;
+    // this.show4 = true;
 
   }
   
