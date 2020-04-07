@@ -17,7 +17,9 @@ export class LeavelistComponent implements OnInit {
   filteredEmployeeLeaves:Iemployeeleave[];
   employeeLeavelist:Iemployeeleave[] = [];
   errorMessage:string;
-  action:string;
+  action1:string='Select Action';
+  action2:string='Select Action';
+  action3:string='Select Action';
    
   
   constructor(private http:HttpClient,private employeeService:EmployeeserviceService,private employeeLeaveService:EmployeeleaveserviceService) { }
