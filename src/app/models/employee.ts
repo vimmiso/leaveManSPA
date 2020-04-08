@@ -1,5 +1,4 @@
-export interface IEmployee {
-    Id:Number;
+export class Employee {
     Name:string;
     DOB:string;
     DOJ:string;

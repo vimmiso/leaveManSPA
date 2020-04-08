@@ -1,5 +1,7 @@
+
+<app-header></app-header>
 <form #form="ngForm" id="form" 
-style="margin-top: 2%; border-radius: 30px;height: 500px; width: 80%; margin-left: 10%; background-position: center;"
+style="margin-top: 2%; border-radius: 30px;height: 650px; width: 80%; margin-left: 10%; background-position: center;"
 (ngSubmit)="onSubmit()">
   <div class="w-100 container form-group"  >
     
@@ -42,7 +44,7 @@ style="margin-top: 2%; border-radius: 30px;height: 500px; width: 80%; margin-lef
               <th>{{employee.totalLeave}}</th> -->
               <div *ngFor='let employee of employeelist'>
                 <div *ngIf='employee.email === Employee.Email'>
-                  <a [routerLink]="['/employeelogin', employee.id]">
+                  <a [routerLink]="['/employees', employee.id]">
                   <button type="submit" class="btn btn-secondary btn-block">Submit</button>
                 </a>
                 </div>

@@ -1,17 +1,46 @@
-
+<!-- <app-header></app-header> -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="./assets/071.jpg" style="margin-top: 6%;" width="30" height="30"
+        class=" rounded-circle d-inline-block align-top mr-sm-2" alt="">
+      <b style="font-size: 32px;">TakLeave</b>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <ul class="nav nav-tabs ml-auto border-dark">
+      <li *ngIf="!header" class="nav-item ">
+        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"> <b>Home</b> </a>
+      </li>
+      <li *ngIf="header" class="nav-item ">
+        <a class="nav-link" ><b>Welcome</b></a>
+      </li>
+      <li *ngIf="!header" class="nav-item">
+        <a class="nav-link" [routerLink]="['/admins']" routerLinkActive="active"><b>Admin login</b></a>
+      </li>
+      <li *ngIf="!header" class="nav-item ">
+        <a class="nav-link" [routerLink]="['/employees']" routerLinkActive="active"><b>Employee login</b></a>
+      </li>
+      <li *ngIf="header" class="nav-item ">
+        <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active"><b>Log out</b></a>
+      </li>
+    </ul>
+  </nav>
 <form>
     <div class="table-responsive">
       <table class="table">
         <thead>
           <th>
-            <a [routerLink]="['/manageemp']">
-            <button type="submit" class="btn btn-success mr-3 shadow rounded border border-dark">Employee</button>
+            <a [routerLink]="['/manageemp',empId]">
+            <button type="submit" (click)="onGetId()" class="btn btn-success mr-3 shadow rounded border border-dark">Employee</button>
             </a>
-            <a [routerLink]="['/leaveconfig']">
-            <button type="submit" class="btn btn-success mr-3">Leave Configuration</button>
+            <a [routerLink]="['/leaveconfig',empId]">
+            <button type="submit" (click)="onGetId()" class="btn btn-success mr-3">Leave Configuration</button>
             </a>
-            <a [routerLink]="['/leavelist']">
-            <button type="submit" class="btn btn-success mr-3">Leave List</button>
+            <a [routerLink]="['/leavelist',empId]">
+            <button type="submit" (click)="onGetId()" class="btn btn-success mr-3">Leave List</button>
             </a>
         </th>
         </thead>
@@ -30,7 +59,9 @@
             </div>
             <button type="button" class="btn btn-outline-dark">Search</button>
             <div class="btn-group float-right" style="position: absolute; margin-left: 88%;">
+              <a [routerLink]="['/manageemp',empId,'add']">
                 <button type="submit" class="btn btn-secondary form-control mr-3">+Add New</button>
+              </a>
             </div>
         </div>
         <div class="row">
@@ -55,12 +86,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let employee of employeelist'>
+                    <tr *ngFor='let emp of employeelist'>
 
-                        <th>{{employee.name}}</th>
-                        <th>{{employee.email}}</th>
-                        <th>{{employee.doj}}</th>
-                        <th>{{employee.dob}}</th>
+                        <th>{{emp.name}}</th>
+                        <th>{{emp.email}}</th>
+                        <th>{{emp.doj}}</th>
+                        <th>{{emp.dob}}</th>
                        
                         <th><button class="btn mr-3"><img src="/assets/edit.png" alt=""> </button><button class="btn"><img src="/assets/delete.png" alt=""> </button> </th>
                         

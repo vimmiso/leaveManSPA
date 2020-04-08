@@ -1,9 +1,9 @@
 import { Ileave } from './../models/ileave';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { IEmployee } from '../models/iemployee';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +11,55 @@ import { tap, catchError } from 'rxjs/operators';
 export class LeaveserviceService {
 
   
-  private employeeUrl = "http://localhost:5000/api/leave";
+  private leaveUrl = "http://localhost:5000/api/leave";
   constructor(private http:HttpClient) { }
 
   getleaves():Observable<Ileave[]> {
-    return this.http.get<Ileave[]>(this.employeeUrl).pipe(
+    return this.http.get<Ileave[]>(this.leaveUrl).pipe(
       tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
+
+  getlea(id: number): Observable<Ileave> {
+    const url = `${this.leaveUrl}/${id}`;
+    return this.http.get<Ileave>(url).pipe(
+      tap(data => console.log('Authorised: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  addLeave(emp: Ileave): Observable<Ileave> {
+    return this.http.post<Ileave>(this.leaveUrl, emp, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }).pipe(
+      tap(data => console.log('We got it: ', + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  updateLeave(emp: Ileave): Observable<Ileave> {
+    const url = `${this.leaveUrl}/${emp.Id}`;
+    return this.http.put<Ileave>(url, emp, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }).pipe(
+      tap(() => console.log('We got it: ', + emp.Id)),
+      map(()=> emp),
+      catchError(this.handleError)
+    );
+  }
+  deleteLeave(id:number):Observable<void>{
+        const url = `${this.leaveUrl}/${id}`;
+
+    return this.http.delete<void>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
   private handleError(err: HttpErrorResponse) {
     let errorMessage='';

@@ -2,7 +2,7 @@ import { EmployeeserviceService } from './../services/employeeservice.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IEmployee } from '../models/iemployee';
 
 @Component({
@@ -50,8 +50,12 @@ public employeelist2:IEmployee[] = [];
   //   formData.resetForm();
   // }
 
-
-  constructor(private http:HttpClient,private employeeService:EmployeeserviceService,private router: Router) { }
+  empId;
+  header:boolean=false;
+  employee:IEmployee;
+  filteredEmployee:IEmployee;
+  // errorMessage:string;
+  constructor(private http:HttpClient,private employeeService:EmployeeserviceService,private router: Router,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.employeeService.getemployees().subscribe(
@@ -61,6 +65,28 @@ public employeelist2:IEmployee[] = [];
       },
       error => this.errorMessage = <any>error
     );
+
+
+    // this.empId = (+this.route.snapshot.paramMap.get('id'));
+    this.route.paramMap.subscribe(
+      params => {
+        this.empId = +params.get('id');
+        console.log(params.get('id'));
+      }
+    );
+    console.log(this.empId);
+    if(this.empId){
+      this.header=true;
+      this.employeeService.getemp(this.empId).subscribe(
+        employee => {
+          this.employee = employee;
+          this.filteredEmployee = this.employee;
+        },
+        error => this.errorMessage = <any>error
+      );
+    }else{
+      this.header=false;
+    }
     // this.employeelist2 = this.employeelist;
     // for(var emp of this.employeelist2){
     //   // if(this.filteredEmployees[0].)

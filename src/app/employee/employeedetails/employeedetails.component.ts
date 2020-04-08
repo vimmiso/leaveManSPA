@@ -31,7 +31,10 @@ export class EmployeedetailsComponent implements OnInit {
   status:string = "Pending";
 
   uniqueid:number = Number(this.route.snapshot.paramMap.get('id'));
-   
+  empId;
+  header:boolean=false;
+  employee:IEmployee;
+  filteredEmployee:IEmployee = {Name:"",Id:0,DOB:"",DOJ:"",Salary:0,Email:"",Role:"",TotalLeave:""};
   ngOnInit(): void {
     this.onLoad();
     // console.log(this.employeeleavelist)
@@ -52,6 +55,30 @@ export class EmployeedetailsComponent implements OnInit {
       },
       error => this.errorMessage = <any>error
     );
+
+
+      
+    this.route.paramMap.subscribe(
+      params => {
+        this.empId = +params.get('id');
+        console.log(this.empId);
+      }
+    );
+    console.log(this.empId);
+    if(this.empId){
+      this.header=true;
+      this.employeeService.getemp(this.empId).subscribe(
+        employee => {
+          this.employee = employee;
+          this.filteredEmployee = this.employee;
+        },
+        error => this.errorMessage = <any>error
+      );
+    }else{
+      this.header=false;
+    }
+
+
   }
 
   SaveFormData(formData: NgForm){
@@ -110,14 +137,44 @@ export class EmployeedetailsComponent implements OnInit {
     private route:ActivatedRoute,private employeeleaveservice:EmployeeleaveserviceService,
     private router: Router) { }
  
- 
+    onGetId():void{
+      this.employeeleaveservice.getemployeeleavemaps().subscribe(
+        leaves => {
+          this.employeeleavelist = leaves;
+          this.filteredEmployeesleave = this.employeeleavelist;
+        },
+        error => this.errorMessage = <any>error
+      );
+      
+      this.route.paramMap.subscribe(
+        params => {
+          this.empId = +params.get('id');
+          console.log(this.empId);
+        }
+      );
+      console.log(this.empId);
+      if(this.empId){
+        this.header=true;
+        this.employeeService.getemp(this.empId).subscribe(
+          employee => {
+            console.log(employee);
+            this.employee = employee;
+            this.filteredEmployee = this.employee;
+          },
+          error => this.errorMessage = <any>error
+        );
+      }else{
+        this.header=false;
+      }
+     }
+    
 
   onClick1():void{
     this.show1 = true;
     this.show2 = false;
     this.show3 = false;
     this.show4 = false;
-
+    this.onGetId();
   }
 
   onClick2():void{
@@ -125,7 +182,7 @@ export class EmployeedetailsComponent implements OnInit {
     this.show2 = true;
     this.show3 = false;
     this.show4 = false;
-
+    this.onGetId();
   }
 
   onClick3():void{
@@ -133,7 +190,7 @@ export class EmployeedetailsComponent implements OnInit {
     this.show2 = false;
     this.show3 = true;
     this.show4 = false;
-
+    this.onGetId();
   }
 
   onClick4():void{

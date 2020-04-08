@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { IEmployee } from '../models/iemployee';
+import { IEmployee } from 'src/app/models/iemployee';
+import { EmployeeserviceService } from 'src/app/services/employeeservice.service';
 import { ActivatedRoute } from '@angular/router';
-import { EmployeeserviceService } from '../services/employeeservice.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HeaderComponent implements OnInit {
 
   constructor(private route:ActivatedRoute,private employeeService:EmployeeserviceService) { }
 

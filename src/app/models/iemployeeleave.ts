@@ -1,13 +1,13 @@
 export interface Iemployeeleave {
 
-    Id:number,
-    EmployeeId:number,
-    LeaveId:number,
-    Status:string,
-    StartDate:string,
-    EndDate:string,
-    LeaveType:string,
-    NoofDays:number
+    Id:number;
+    EmployeeId:number;
+    LeaveId:number;
+    Status:string;
+    StartDate:string;
+    EndDate:string;
+    LeaveType:string;
+    NoofDays:number;
 
     // public int Id { get; set; }
     // public int EmployeeId { get; set; }
