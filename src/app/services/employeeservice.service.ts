@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError, pipe } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { IEmployee } from '../models/iemployee';
+import { IEmployee2 } from '../models/IEmployee2';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,14 @@ export class EmployeeserviceService {
     );
   }
 
+  getemp2(id: number): Observable<IEmployee2> {
+    const url = `${this.employeeUrl}/${id}`;
+    return this.http.get<IEmployee2>(url).pipe(
+      tap(data => console.log('Authorised: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
   addEmp(emp: IEmployee): Observable<IEmployee> {
     return this.http.post<IEmployee>(this.employeeUrl, emp, {
       headers: new HttpHeaders({
@@ -40,14 +49,14 @@ export class EmployeeserviceService {
     );
   }
 
-  updateEmp(emp: IEmployee): Observable<IEmployee> {
-    const url = `${this.employeeUrl}/${emp.Id}`;
-    return this.http.put<IEmployee>(url, emp, {
+  updateEmp(emp: IEmployee2): Observable<IEmployee2> {
+    const url = `${this.employeeUrl}/${emp.id}`;
+    return this.http.put<IEmployee2>(url, emp, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }).pipe(
-      tap(() => console.log('We got it: ', + emp.Id)),
+      tap(() => console.log('We got it: ', + emp.id)),
       map(()=> emp),
       catchError(this.handleError)
     );

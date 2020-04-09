@@ -1,3 +1,4 @@
+import { UpdateemployeeComponent } from './updateemployee/updateemployee.component';
 import { AddleaveComponent } from './addleave/addleave.component';
 import { AddemployeeComponent } from './addemployee/addemployee.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
@@ -12,7 +13,8 @@ const APP_ROUTES2: Routes = [
     {path: 'leavelist/:id',component: LeavelistComponent},
     {path: 'leaveconfig/:id',component: LeaveconfigComponent},
     {path: 'adminslogin',component: AdminloginComponent},
-    {path: 'manageemp/:id/add',component: AddemployeeComponent}, 
+    {path: 'manageemp/:id/add',component: AddemployeeComponent},
+    {path: 'manageemp/:id/edit/:lid',component: UpdateemployeeComponent}, 
     {path: 'leaveconfig/:id/add',component: AddleaveComponent},    
 ];
 

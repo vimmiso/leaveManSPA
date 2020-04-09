@@ -14,13 +14,15 @@ export class ManageEmployeeComponent implements OnInit {
   filteredEmployees:IEmployee[];
  employeelist:IEmployee[] = [];
  errorMessage:string;
-  empId;
+  
  header:boolean=false;
  employee:IEmployee;
  filteredEmployee:IEmployee = {Name:"",Id:0,DOB:"",DOJ:"",Salary:0,Email:"",Role:"",TotalLeave:""};
 //  errorMessage:string;
  
  constructor(private http:HttpClient,private employeeService:EmployeeserviceService,private route:ActivatedRoute) { }
+
+ empId = Number(this.route.snapshot.paramMap.get('id'));
 
  ngOnInit(): void {
    this.employeeService.getemployees().subscribe(
