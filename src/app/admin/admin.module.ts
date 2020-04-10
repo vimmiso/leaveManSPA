@@ -15,11 +15,12 @@ import { AddleaveComponent } from './addleave/addleave.component';
 // import { HeaderComponent } from '../Layoutcomponent/header/header.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UpdateemployeeComponent } from './updateemployee/updateemployee.component';
+import { UpdateleaveComponent } from './updateleave/updateleave.component';
 
 
 
 @NgModule({
-  declarations: [ManageEmployeeComponent, LeaveconfigComponent, LeavelistComponent, AdminloginComponent, AddemployeeComponent, AddleaveComponent, UpdateemployeeComponent],
+  declarations: [ManageEmployeeComponent, LeaveconfigComponent, LeavelistComponent, AdminloginComponent, AddemployeeComponent, AddleaveComponent, UpdateemployeeComponent, UpdateleaveComponent],
   imports: [
     FormsModule,
     CommonModule,

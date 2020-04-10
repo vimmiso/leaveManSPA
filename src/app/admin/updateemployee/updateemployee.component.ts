@@ -37,7 +37,7 @@ export class UpdateemployeeComponent implements OnInit {
   // role=this.ed[0].Role;
   filteredEmployees: IEmployee[];
   employeelist: IEmployee[] = [];
- ;
+ 
 
   uniqueid: number = Number(this.route.snapshot.paramMap.get('lid'));
   emp:IEmployee2 = {
@@ -51,15 +51,18 @@ export class UpdateemployeeComponent implements OnInit {
     totalLeave: this.editemployee2.totalLeave
   };
   onSubmit(formData: NgForm) {
+    this.emp.id = this.uniqueid;
+    this.emp.name = this.emp.name;
+    this.emp.email = this.emp.email;
     var date1 = new Date(this.emp.doj);
     var date2 = new Date(this.emp.dob);
     this.emp.doj = date1.toDateString();
     this.emp.dob = date2.toDateString();
-    console.log(date1);
-    console.log(date2);
     this.emp.salary=this.emp.salary;
     this.emp.role=this.emp.role;
     this.emp.totalLeave=this.emp.totalLeave;
+    console.log(date1);
+    console.log(date2);
    
     // console.log("formvalue: "+formData.value.name);
     console.log(this.emp);
@@ -73,6 +76,7 @@ export class UpdateemployeeComponent implements OnInit {
 
     formData.resetForm();
     this.router.navigate(['/manageemp', this.empId]);
+    // this.reloadComponent();
 
 
     // this.router.navigate(['/employeelogin',this.uniqueid]).then(nav => {
@@ -86,10 +90,10 @@ export class UpdateemployeeComponent implements OnInit {
 
 
   constructor(private http: HttpClient, private employeeService: EmployeeserviceService, private route: ActivatedRoute, private router: Router) {
-
-
-
   }
+
+
+
 
   prevUrl() {
     this.router.events
@@ -113,14 +117,7 @@ export class UpdateemployeeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.editemployee1);
-    //  this.employeeService.getemployees().subscribe(
-    //    employees => {
-    //      this.employeelist = employees;
-    //      this.filteredEmployees = this.employeelist;
-
-    //    },
-    //    error => this.errorMessage = <any>error
-    //  );
+   
     this.employeeService.getemployees().subscribe(
       employees => {
         this.employeelist = (employees);
@@ -134,38 +131,19 @@ export class UpdateemployeeComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         this.empId = +params.get('id');
-        console.log(this.empId);
+        console.log("empId"+this.empId);
       }
     );
     this.route.paramMap.subscribe(
       params => {
         this.uniqueid = +params.get('lid');
-        console.log(this.empId);
+        console.log("uniqueid"+this.uniqueid);
       }
     );
     console.log(this.empId);
     if (this.empId !==null) {
       this.header = true;
-      this.employeeService.getemp(this.empId).subscribe(
-        employee => {
-          console.log(employee);
-          
-          this.employee = employee;
-          this.filteredEmployee = this.employee;
-        },
-        error => this.errorMessage = <any>error
-      );
-
-      this.employeeService.getemp(this.uniqueid).subscribe(
-        editemp => {
-          console.log(editemp);
-          this.editemployee1 = (editemp);
-          this.ed.push(editemp);
-        
-          this.filteredEditEmployee1 = this.editemployee1;
-        },
-        error => this.errorMessage = <any>error
-      );
+     
       this.employeeService.getemp2(this.uniqueid).subscribe(
         editemp => {
           console.log(editemp);
@@ -203,22 +181,22 @@ export class UpdateemployeeComponent implements OnInit {
     console.log(this.empId);
     if (this.empId) {
       this.header = true;
-      this.employeeService.getemp(this.empId).subscribe(
-        employee => {
-          console.log(employee);
-          this.employee = employee;
-          this.filteredEmployee = this.employee;
-        },
-        error => this.errorMessage = <any>error
-      );
-      this.employeeService.getemp(this.uniqueid).subscribe(
-        editemp => {
-          console.log(editemp);
-          this.editemployee1 = editemp;
-          this.filteredEditEmployee1 = this.editemployee1;
-        },
-        error => this.errorMessage = <any>error
-      );
+      // this.employeeService.getemp(this.empId).subscribe(
+      //   employee => {
+      //     console.log(employee);
+      //     this.employee = employee;
+      //     this.filteredEmployee = this.employee;
+      //   },
+      //   error => this.errorMessage = <any>error
+      // );
+      // this.employeeService.getemp(this.uniqueid).subscribe(
+      //   editemp => {
+      //     console.log(editemp);
+      //     this.editemployee1 = editemp;
+      //     this.filteredEditEmployee1 = this.editemployee1;
+      //   },
+      //   error => this.errorMessage = <any>error
+      // );
       this.employeeService.getemp2(this.uniqueid).subscribe(
         editemp => {
           console.log(editemp);

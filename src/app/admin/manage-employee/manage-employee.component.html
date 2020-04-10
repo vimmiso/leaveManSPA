@@ -89,7 +89,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let emp of employeelist'>
+          <tr *ngFor='let emp of employeelist2'>
 
             <th>{{emp.name}}</th>
             <th>{{emp.email}}</th>
@@ -102,7 +102,7 @@
                   <img src="/assets/edit.png" alt="">
                 </button>
               </a>
-              <button class="btn">
+              <button class="btn" (click)="delete(emp.id)">
                 <img src="/assets/delete.png" alt="">
               </button>
             </th>

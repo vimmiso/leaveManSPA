@@ -1,4 +1,4 @@
-import { Ileave } from './../models/ileave';
+import { Ileave, Ileave2 } from './../models/ileave';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -29,6 +29,14 @@ export class LeaveserviceService {
     );
   }
 
+  getlea2(id: number): Observable<Ileave2> {
+    const url = `${this.leaveUrl}/${id}`;
+    return this.http.get<Ileave2>(url).pipe(
+      tap(data => console.log('Authorised: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
   addLeave(emp: Ileave): Observable<Ileave> {
     return this.http.post<Ileave>(this.leaveUrl, emp, {
       headers: new HttpHeaders({
@@ -40,14 +48,14 @@ export class LeaveserviceService {
     );
   }
 
-  updateLeave(emp: Ileave): Observable<Ileave> {
-    const url = `${this.leaveUrl}/${emp.Id}`;
-    return this.http.put<Ileave>(url, emp, {
+  updateLeave(emp: Ileave2): Observable<Ileave2> {
+    const url = `${this.leaveUrl}/${emp.id}`;
+    return this.http.put<Ileave2>(url, emp, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }).pipe(
-      tap(() => console.log('We got it: ', + emp.Id)),
+      tap(() => console.log('We got it: ', + emp.id)),
       map(()=> emp),
       catchError(this.handleError)
     );

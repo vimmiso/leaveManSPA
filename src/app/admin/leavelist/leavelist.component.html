@@ -122,10 +122,10 @@
                             
                             <th *ngIf="emp.id === employeeleave.employeeId">
                                 <div class="form-group">
-                                    <select class="form-control form-control-sm" id="action">
-                                        <option>Select Action</option>
-                                        <option>Approve</option>
-                                        <option>Reject</option>
+                                    <select class="form-control form-control-sm" id="action" (change)="decision(employeeleave,$event.target.value)" name="action">
+                                        <option >Select Action</option>
+                                        <option value="Approve">Approve</option>
+                                        <option value="Reject">Reject</option>
                                     
                                     </select>
                                 </div>

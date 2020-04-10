@@ -21,6 +21,12 @@ export class EmployeeserviceService {
       catchError(this.handleError )
     );
   }
+  getemployees2(): Observable<IEmployee2[]> {
+    return this.http.get<IEmployee2[]>(this.employeeUrl).pipe(
+      tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError )
+    );
+  }
 
   getemp(id: number): Observable<IEmployee> {
     const url = `${this.employeeUrl}/${id}`;
@@ -40,6 +46,17 @@ export class EmployeeserviceService {
 
   addEmp(emp: IEmployee): Observable<IEmployee> {
     return this.http.post<IEmployee>(this.employeeUrl, emp, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }).pipe(
+      tap(data => console.log('We got it: ', + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  addEmp2(emp: IEmployee2): Observable<IEmployee2> {
+    return this.http.post<IEmployee2>(this.employeeUrl, emp, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

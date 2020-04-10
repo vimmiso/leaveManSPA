@@ -25,7 +25,7 @@ export class EmployeedetailsComponent implements OnInit {
   show2:boolean = false;
   show3:boolean = false;
   show4:boolean = false;
-  leavetype;
+  leavetype:string="Select Type";
   fromdate;
   todate;
   status:string = "Pending";

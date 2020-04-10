@@ -1,7 +1,16 @@
 export interface Ileave {
-    Id:number;
+    Id:Number;
     Name:string;
-    MaxLeaves:number;
+    MaxLeaves:Number;
+    // public int Id { get; set; }
+    // public string Name { get; set; }
+    // public int MaxLeaves { get; set; }
+}
+
+export interface Ileave2 {
+    id:Number;
+    name:string;
+    maxLeaves:Number;
     // public int Id { get; set; }
     // public string Name { get; set; }
     // public int MaxLeaves { get; set; }

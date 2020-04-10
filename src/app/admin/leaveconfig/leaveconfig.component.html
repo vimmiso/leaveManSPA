@@ -109,7 +109,16 @@
                         <!-- <th></th> -->
                         <!-- <th></th> -->
                        
-                        <th colspan="3"><button class="btn mr-3"><img src="/assets/edit.png" alt=""> </button><button class="btn"><img src="/assets/delete.png" alt=""> </button> </th>
+                        <th colspan="3">
+                          <a [routerLink]="['/leaveconfig',empId,'edit',leave.id]">
+                          <button class="btn mr-3">
+                            <img src="/assets/edit.png" alt="">
+                          </button>
+                          </a>
+                          <button class="btn" (click)="delete(leave.id)">
+                           <img src="/assets/delete.png" alt="">
+                          </button>
+                        </th>
                         <th></th>
                         <th></th>
                         <th></th>

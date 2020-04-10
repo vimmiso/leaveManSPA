@@ -69,6 +69,12 @@ export class LeaveconfigComponent implements OnInit {
     // })
   }
 
+  delete(id:number){
+    this.leaveSerice.deleteLeave(id).subscribe(
+      error => this.errorMessage = <any>error
+    )
+  }
+
   
  onGetId():void{
   

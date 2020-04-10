@@ -1,4 +1,4 @@
-export interface IEmployee2 {
+export interface IEEmployee {
     id:Number;
     name:string;
     dob:string;
@@ -9,7 +9,3 @@ export interface IEmployee2 {
     totalLeave:string;
 }
 
-export interface EmployeeResolved{
-    eemployeelist: IEmployee2[];
-    error?: any;
-}

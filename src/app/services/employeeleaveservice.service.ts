@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Iemployeeleave } from '../models/iemployeeleave';
 import { Observable, throwError } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { tap, catchError, map } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,19 @@ export class EmployeeleaveserviceService {
   getemployeeleavemaps():Observable<Iemployeeleave[]> {
     return this.http.get<Iemployeeleave[]>(this.employeeUrl).pipe(
       tap(data => console.log('All: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  updateLeaveDecision(emp:Iemployeeleave): Observable<Iemployeeleave> {
+    const url = `${this.employeeUrl}/${emp.id}`;
+    return this.http.put<Iemployeeleave>(url, emp, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }).pipe(
+      tap(() => console.log('We got it: ', + emp.id)),
+      map(()=> emp),
       catchError(this.handleError)
     );
   }
